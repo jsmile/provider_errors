@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'src/app.dart';
+import 'src/app_error1.dart';
 
 void main() {
-  runApp(const App());
+  runApp(const AppError1());
 }
