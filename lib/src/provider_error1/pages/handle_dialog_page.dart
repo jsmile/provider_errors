@@ -32,6 +32,23 @@ class _HandleDialogPageState extends State<HandleDialogPage> {
 
   @override
   Widget build(BuildContext context) {
+    // build 중이므로 상태변화를 야기시 발생하는 오류 방지
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // if (context.watch<Counter>().counter == 3) {  // widget tree 밖에서 사용 error
+      if (context.read<Counter>().counter == 3) {
+        // if (Provider.of<Counter>(context, listen: false).counter == 3) {
+        // 단지
+        showDialog(
+          context: context,
+          builder: (context) {
+            return const AlertDialog(
+              content: Text('Be careful !!!'),
+            );
+          },
+        );
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Handle Dialog'),
