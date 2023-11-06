@@ -16,6 +16,24 @@ class NavigatePage extends StatefulWidget {
 class _NavigatePageState extends State<NavigatePage> {
   @override
   Widget build(BuildContext context) {
+    // if (context.read<Counter>().counter == 3) {
+    //   // build 작업 중에 또다른 widget 를 생성하면 오류 발생
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => const OtherPage()),
+    //   );
+    // }
+
+    if (context.read<Counter>().counter == 3) {
+      // build 작업이 끝나고 실행할 수 있도록 addPostFrameCallback 사용
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const OtherPage()),
+        );
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Navigate Page'),
